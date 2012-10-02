@@ -1,6 +1,6 @@
 object frmEditMahasiswa: TfrmEditMahasiswa
-  Left = 352
-  Top = 118
+  Left = 361
+  Top = 163
   BorderStyle = bsDialog
   Caption = 'Ubah Data Mahasiswa'
   ClientHeight = 245
@@ -14,6 +14,7 @@ object frmEditMahasiswa: TfrmEditMahasiswa
   OldCreateOrder = False
   Position = poOwnerFormCenter
   OnActivate = FormActivate
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 16
   object Label1: TLabel
@@ -73,7 +74,6 @@ object frmEditMahasiswa: TfrmEditMahasiswa
     Top = 112
     Width = 225
     Height = 24
-    DataField = 'dosen_wali'
     DataSource = FrmMahasiswa.mhsDS
     KeyField = 'nip'
     ListField = 'nama'
@@ -101,7 +101,6 @@ object frmEditMahasiswa: TfrmEditMahasiswa
     Top = 147
     Width = 209
     Height = 24
-    DataField = 'prodi'
     DataSource = FrmMahasiswa.mhsDS
     KeyField = 'kode_prodi'
     ListField = 'nama'

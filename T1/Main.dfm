@@ -1,7 +1,6 @@
 object FrmMahasiswa: TFrmMahasiswa
   Left = 213
   Top = 121
-  BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Data Mahasiswa'
   ClientHeight = 521
@@ -14,6 +13,9 @@ object FrmMahasiswa: TFrmMahasiswa
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  DesignSize = (
+    946
+    521)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -34,6 +36,7 @@ object FrmMahasiswa: TFrmMahasiswa
     Top = 40
     Width = 929
     Height = 417
+    Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = mhsDS
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -45,10 +48,11 @@ object FrmMahasiswa: TFrmMahasiswa
   object DBNavigator1: TDBNavigator
     Left = 8
     Top = 472
-    Width = 450
+    Width = 448
     Height = 33
     DataSource = mhsDS
-    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+    Anchors = [akLeft, akBottom]
     TabOrder = 1
   end
   object btnEdit: TButton
@@ -56,6 +60,7 @@ object FrmMahasiswa: TFrmMahasiswa
     Top = 472
     Width = 75
     Height = 33
+    Anchors = [akLeft, akBottom]
     Caption = 'Ubah'
     TabOrder = 2
     OnClick = btnEditClick
@@ -87,6 +92,7 @@ object FrmMahasiswa: TFrmMahasiswa
     Top = 472
     Width = 65
     Height = 33
+    Anchors = [akLeft, akBottom]
     Caption = '+'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -102,6 +108,7 @@ object FrmMahasiswa: TFrmMahasiswa
     Top = 472
     Width = 75
     Height = 33
+    Anchors = [akLeft, akBottom]
     Caption = '-'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -138,7 +145,11 @@ object FrmMahasiswa: TFrmMahasiswa
     Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
-    CommandText = 'select *  from mhs;'
+    CommandText = 
+      'select m.nrp as nrp, m.nama as nama, m.alamat as alamat,'#13#10'd.nama' +
+      ' as dosen, p.nama as prodi'#13#10'from mhs m, dosen d, prodi p'#13#10'where ' +
+      'm.dosen_wali = d.nip and m.prodi = p.kode_prodi '#13#10' order by m.nr' +
+      'p;'
     Parameters = <>
     Left = 408
   end

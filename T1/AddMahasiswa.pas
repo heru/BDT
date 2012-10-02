@@ -41,17 +41,22 @@ implementation
 {$R *.dfm}
 
 procedure TFrmTambahMahasiswa.btnSimpanClick(Sender: TObject);
+var adoCmd : TADOCommand;
+    query_insert : string;
 begin
   if Edit1.Text <> '' then
   begin
-        FrmMahasiswa.ADODataSet1.Append;
-        FrmMahasiswa.ADODataSet1.FieldValues['nrp'] := Edit1.Text;
-        FrmMahasiswa.ADODataSet1.FieldValues['nama'] := Edit2.Text;
-        FrmMahasiswa.ADODataSet1.FieldValues['alamat'] := Edit3.Text;
-        FrmMahasiswa.ADODataSet1.FieldValues['dosen_wali'] := dbLookupDosen.KeyValue;
-        FrmMahasiswa.ADODataSet1.FieldValues['prodi'] := dblookupProdi.KeyValue;
-        FrmMahasiswa.ADODataSet1.Post;
-        close ;
+    query_insert := 'insert into mhs(nrp, nama, alamat, dosen_wali, prodi) values(''' + Edit1.Text + ''', ''' + Edit2.Text + ''', ''' + Edit3.Text + ''', ''' + dbLookupDosen.KeyValue + ''', ''' + dblookupProdi.KeyValue + ''');';
+
+    adoCmd := TADOCommand.Create(self);
+    adoCmd.Connection := FrmMahasiswa.ADOConnection1;
+    adoCmd.CommandType := cmdText;
+    adoCmd.CommandText := query_insert;
+    adoCmd.Execute;
+    // refresh grid di FrmMahasiswa
+    FrmMahasiswa.ReloadDataset;
+    adoCmd.Free;
+    close ;
   end
   else
   begin
@@ -73,7 +78,12 @@ begin
   Edit1.Clear;
   Edit2.Clear;
   Edit3.Clear;
+
+  dbLookupDosen.DataField := 'dosen_wali';
+
   datasetDosen.Open;
+
+  dblookupProdi.DataField := 'prodi';
   datasetProdi.Open;
 end;
 
