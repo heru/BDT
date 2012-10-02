@@ -1,4 +1,4 @@
 BDT
 ===
 
-basis data terdistribusi
+basis data terdistribusi, kumpulan manajemen basis data terdistribusi
