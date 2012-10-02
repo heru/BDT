@@ -1,6 +1,6 @@
 object FrmMahasiswa: TFrmMahasiswa
-  Left = 195
-  Top = 67
+  Left = 213
+  Top = 121
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Data Mahasiswa'

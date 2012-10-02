@@ -57,7 +57,7 @@ object FrmPengambilanFRS: TFrmPengambilanFRS
     Top = 148
     Width = 873
     Height = 193
-    DataSource = dsPengambilanFRS
+    DataSource = dsQueryFRS
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -142,7 +142,7 @@ object FrmPengambilanFRS: TFrmPengambilanFRS
     Top = 349
     Width = 376
     Height = 33
-    DataSource = dsMataKuliah
+    DataSource = dsQueryFRS
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     TabOrder = 7
   end
@@ -154,6 +154,7 @@ object FrmPengambilanFRS: TFrmPengambilanFRS
     Caption = '&Hapus Mata Kuliah'
     Enabled = False
     TabOrder = 8
+    OnClick = btnHapusMataKuliahClick
   end
   object dsMataKuliah: TDataSource
     DataSet = adoDSMataKuliah
@@ -169,7 +170,7 @@ object FrmPengambilanFRS: TFrmPengambilanFRS
     Left = 824
     Top = 392
   end
-  object dsPengambilanFRS: TDataSource
+  object dsQueryFRS: TDataSource
     DataSet = adoQueryFRS
     Left = 568
     Top = 112

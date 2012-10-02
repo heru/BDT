@@ -21,7 +21,7 @@ type
     btnAddMataKuliah: TButton;
     dsMataKuliah: TDataSource;
     adoDSMataKuliah: TADODataSet;
-    dsPengambilanFRS: TDataSource;
+    dsQueryFRS: TDataSource;
     dsLookupMhs: TDataSource;
     adoDatasetLookupMhs: TADODataSet;
     Label5: TLabel;
@@ -35,6 +35,7 @@ type
     procedure btnAddMataKuliahClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure adoQueryFRSAfterOpen(DataSet: TDataSet);
+    procedure btnHapusMataKuliahClick(Sender: TObject);
   private
     { Private declarations }
     lookup_nrp :string;
@@ -81,6 +82,8 @@ begin
         txtNama.Text := nama_mhs;
         txtDosenWali.Text := adoDatasetLookupMhs.FieldValues['nama_dosen'];
         txtProdi.Text := adoDatasetLookupMhs.FieldValues['nama_prodi'];
+        // set class variable dengan nrp yang sekarang
+        // set flag data mahasiswa ditemukan
         lookup_nrp := nrp;
         mhs_found := True;
         btnAddMataKuliah.Enabled :=True;
@@ -109,7 +112,7 @@ begin
   adoQueryFRS.Close;
   adoQueryFRS.CommandText := query_string;
   adoQueryFRS.Connection := FrmMahasiswa.ADOConnection1;
-  dsMataKuliah.DataSet := adoQueryFRS;
+  dsQueryFRS.DataSet := adoQueryFRS;
   adoQueryFRS.Open;
 end;
 
@@ -121,8 +124,7 @@ var
   adoInsert : TADOCommand;
   found:Boolean;
   msg:string;
-begin
-
+begin   
   if dbLookupComboMataKuliah.KeyValue <> Null then
   begin
     kode_mata_kuliah := dbLookupComboMataKuliah.KeyValue;
@@ -205,6 +207,26 @@ begin
     btnHapusMataKuliah.Enabled := True
   else
     btnHapusMataKuliah.Enabled := False
+end;
+
+procedure TFrmPengambilanFRS.btnHapusMataKuliahClick(Sender: TObject);
+var query_delete:string;
+    delete_mata_kuliah : string;
+    adoDelete : TADOCommand;
+begin
+  if MessageDlg('Hapus mata kuliah ini dari daftar FRS ?', mtConfirmation, [mbYes, mbNo],0) = mrYes then
+  begin
+    delete_mata_kuliah := adoQueryFRS.FieldValues['kode'];
+    query_delete := 'DELETE FROM pengambilan_frs WHERE mhs_id LIKE ''' + lookup_nrp + ''' and kode_mata_kuliah LIKE ''' +  delete_mata_kuliah + ''' ;';
+    adoDelete := TADOCommand.Create(self);
+    adoDelete.CommandText := query_delete;
+    adoDelete.CommandType := cmdText;
+    adoDelete.Connection := FrmMahasiswa.ADOConnection1;
+    adoDelete.Execute;
+    // free adoDelete dan reload table FRS
+    adoDelete.Free;
+    FillFRS(lookup_nrp);
+  end;   
 end;
 
 end.
