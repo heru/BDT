@@ -27,6 +27,7 @@ type
     procedure btnSimpanClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -85,6 +86,23 @@ begin
 
   dblookupProdi.DataField := 'prodi';
   datasetProdi.Open;
+end;
+
+procedure TFrmTambahMahasiswa.Edit1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in [#8, '0'..'9', '-', DecimalSeparator]) then
+  begin
+    Key := #0;
+  end
+  else if ((Key = DecimalSeparator) or (Key = '-')) and (Pos(Key, (Sender as TEdit).Text) > 0) then
+  begin
+    Key := #0;
+  end
+  else if (Key = '-') and ((Sender as TEdit).SelStart <> 0) then
+  begin
+    Key := #0;
+  end;
 end;
 
 end.

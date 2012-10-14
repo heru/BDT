@@ -1,6 +1,6 @@
 object FrmTambahMahasiswa: TFrmTambahMahasiswa
   Left = 386
-  Top = 163
+  Top = 178
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Tambah Data Mahasiswa'
@@ -58,6 +58,7 @@ object FrmTambahMahasiswa: TFrmTambahMahasiswa
     Width = 201
     Height = 28
     TabOrder = 0
+    OnKeyPress = Edit1KeyPress
   end
   object Edit2: TEdit
     Left = 144
