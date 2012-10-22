@@ -8,7 +8,9 @@ uses
   ListDosen in 'ListDosen.pas' {frmDosen},
   ListProdi in 'ListProdi.pas' {frmProgramStudi},
   PengambilanFRS in 'PengambilanFRS.pas' {FrmPengambilanFRS},
-  MataKuliah in 'MataKuliah.pas' {FormMataKuliah};
+  MataKuliah in 'MataKuliah.pas' {FormMataKuliah},
+  LaporanFRS in 'LaporanFRS.pas' {FrmLaporanFRS},
+  DaftarMahasiswaPerKelas in 'DaftarMahasiswaPerKelas.pas' {FrmDaftarMhsPerKelas};
 
 {$R *.res}
 
@@ -21,5 +23,7 @@ begin
   Application.CreateForm(TfrmProgramStudi, frmProgramStudi);
   Application.CreateForm(TFrmPengambilanFRS, FrmPengambilanFRS);
   Application.CreateForm(TFormMataKuliah, FormMataKuliah);
+  Application.CreateForm(TFrmLaporanFRS, FrmLaporanFRS);
+  Application.CreateForm(TFrmDaftarMhsPerKelas, FrmDaftarMhsPerKelas);
   Application.Run;
   end.

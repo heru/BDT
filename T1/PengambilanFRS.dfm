@@ -1,6 +1,6 @@
 object FrmPengambilanFRS: TFrmPengambilanFRS
   Left = 192
-  Top = 114
+  Top = 101
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Pengambilan FRS'
@@ -52,11 +52,25 @@ object FrmPengambilanFRS: TFrmPengambilanFRS
     Height = 13
     Caption = 'Program Studi'
   end
+  object LblJumlahMataKuliah: TLabel
+    Left = 24
+    Top = 328
+    Width = 92
+    Height = 13
+    Caption = 'Jumlah Mata Kuliah'
+  end
+  object LblJumlahSKS: TLabel
+    Left = 232
+    Top = 328
+    Width = 24
+    Height = 13
+    Caption = 'SKS:'
+  end
   object DBGrid1: TDBGrid
     Left = 16
     Top = 148
     Width = 873
-    Height = 193
+    Height = 165
     DataSource = dsQueryFRS
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET

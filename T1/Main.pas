@@ -27,6 +27,7 @@ type
     btnDelete: TButton;
     mnPengambilanFRS: TMenuItem;
     mnMataKuliah: TMenuItem;
+    MnDaftarKelas: TMenuItem;
     procedure btnEditClick(Sender: TObject);
     procedure btnFilterClick(Sender: TObject);
     procedure mnExitClick(Sender: TObject);
@@ -36,6 +37,7 @@ type
     procedure btnDeleteClick(Sender: TObject);
     procedure mnPengambilanFRSClick(Sender: TObject);
     procedure mnMataKuliahClick(Sender: TObject);
+    procedure MnDaftarKelasClick(Sender: TObject);
   private
     { Private  }
   public
@@ -45,11 +47,12 @@ type
 
 var
   FrmMahasiswa: TFrmMahasiswa;
- 
+
 
 implementation
 
-uses EditMahasiswa,AddMahasiswa, ListDosen, ListProdi, PengambilanFRS, MataKuliah;
+uses EditMahasiswa,AddMahasiswa, ListDosen, ListProdi, PengambilanFRS,
+     MataKuliah, DaftarMahasiswaPerKelas;
 
 {$R *.dfm}
 
@@ -141,6 +144,16 @@ begin
   ADODataSet1.Close;
   ADODataSet1.CommandText := 'select m.nrp as nrp, m.nama as nama, m.alamat as alamat, d.nama as dosen, p.nama as prodi from mhs m, dosen d, prodi p where m.dosen_wali = d.nip and m.prodi = p.kode_prodi order by m.nrp;';
   ADODataSet1.Open;
+end;
+
+procedure TFrmMahasiswa.MnDaftarKelasClick(Sender: TObject);
+var
+  daftarMhs : TFrmDaftarMhsPerKelas;
+begin
+  daftarMhs := TFrmDaftarMhsPerKelas.Create(self, self.ADOConnection1);
+  daftarMhs.Position := poOwnerFormCenter;
+  daftarMhs.ShowModal;
+  daftarMhs.Free;
 end;
 
 end.

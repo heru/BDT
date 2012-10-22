@@ -1,6 +1,6 @@
 object FrmMahasiswa: TFrmMahasiswa
-  Left = 213
-  Top = 87
+  Left = 336
+  Top = 159
   BorderStyle = bsSingle
   Caption = 'Data Mahasiswa'
   ClientHeight = 521
@@ -13,6 +13,7 @@ object FrmMahasiswa: TFrmMahasiswa
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  Position = poScreenCenter
   DesignSize = (
     946
     521)
@@ -175,6 +176,10 @@ object FrmMahasiswa: TFrmMahasiswa
       object mnPengambilanFRS: TMenuItem
         Caption = 'Pengambilan FRS'
         OnClick = mnPengambilanFRSClick
+      end
+      object MnDaftarKelas: TMenuItem
+        Caption = 'Daftar Mhs Per Kelas'
+        OnClick = MnDaftarKelasClick
       end
     end
     object mnExit: TMenuItem

@@ -31,6 +31,8 @@ type
     txtProdi: TEdit;
     dbNavMataKuliah: TDBNavigator;
     btnHapusMataKuliah: TButton;
+    LblJumlahMataKuliah: TLabel;
+    LblJumlahSKS: TLabel;
     procedure btnLookupClick(Sender: TObject);
     procedure btnAddMataKuliahClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -45,6 +47,7 @@ type
     procedure FillFRS(nrp : string);
     function IsMataKuliahExist(nrp:string; mata_kuliah:string):Boolean;
     procedure EmptyField();
+    procedure CountFRS(nrp:string);
   end;
 
 var
@@ -107,6 +110,9 @@ end;
 procedure TFrmPengambilanFRS.FillFRS(nrp: string);
 var
   query_string:string;
+  jumlahMK :Integer;
+  row :Integer;
+  jumlah :Integer;
 begin
   query_string := 'select m.kode as kode, m.nama as nama, m.sks as sks from mata_kuliah m, pengambilan_frs f where f.mhs_id like ''' + nrp + ''' and f.kode_mata_kuliah = m.kode;';
   adoQueryFRS.Close;
@@ -114,6 +120,29 @@ begin
   adoQueryFRS.Connection := FrmMahasiswa.ADOConnection1;
   dsQueryFRS.DataSet := adoQueryFRS;
   adoQueryFRS.Open;
+  jumlahMK := adoQueryFRS.RecordCount;
+
+  if jumlahMK > 0 then
+  begin
+    row :=0;
+    jumlah := 0;
+    adoQueryFRS.First;
+    while row <jumlahMK do
+    begin
+      jumlah := jumlah + adoQueryFRS.FieldValues['sks'];
+      row := row + 1;
+      adoQueryFRS.Next;
+    end;
+    LblJumlahMataKuliah.Caption := 'Jumlah Mata Kuliah :' + IntToStr(jumlahMK);
+    LblJumlahSKS.Caption := 'SKS :' + IntToStr(jumlah);
+    //-- kembalikan posisi cursor adoQueryFRS ke awal
+    adoQueryFRS.First;
+  end
+  else
+  begin
+    LblJumlahMataKuliah.Caption:='Jumlah Mata Kuliah :0';
+    LblJumlahSKS.Caption := 'SKS :0';
+  end;
 end;
 
 procedure TFrmPengambilanFRS.btnAddMataKuliahClick(Sender: TObject);
@@ -124,7 +153,7 @@ var
   adoInsert : TADOCommand;
   found:Boolean;
   msg:string;
-begin   
+begin
   if dbLookupComboMataKuliah.KeyValue <> Null then
   begin
     kode_mata_kuliah := dbLookupComboMataKuliah.KeyValue;
@@ -163,7 +192,7 @@ var
   query_search:string;
   found : Integer;
   dataset : TADODataSet;
-begin   
+begin
   query_search := 'select * from pengambilan_frs where mhs_id like ''' + nrp + ''' and kode_mata_kuliah like ''' + mata_kuliah + ''';';
   dataset := TADODataSet.Create(self);
   dataset.Close;
@@ -177,11 +206,24 @@ begin
   dataset.Close;
   dataset.Free;
   if found > 0 then
-    Result := True
+  begin
+    Result := True;
+    //LblJumlahMataKuliah.Caption := 'Jumlah Mata Kuliah :' + IntToStr(found);
+  end
   else
-    Result := False
-  
+  begin
+    Result := False;
+    //LblJumlahMataKuliah.Caption := 'Jumlah Mata Kuliah : 0';
+  end;
 end;
+
+procedure TFrmPengambilanFRS.CountFRS(nrp:string);
+var adoCmd:TADOCommand;
+    querySearch:string;
+begin
+  querySearch:= 'select count(m.sks) from pengambilan_frs p, mata_kuliah m where mhs_id like ''' + nrp + ''' and p.mhs_id = ';
+end;
+
 
 procedure TFrmPengambilanFRS.FormActivate(Sender: TObject);
 begin
@@ -226,7 +268,8 @@ begin
     // free adoDelete dan reload table FRS
     adoDelete.Free;
     FillFRS(lookup_nrp);
-  end;   
+  end;
 end;
+
 
 end.

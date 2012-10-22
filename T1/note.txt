@@ -1,3 +1,12 @@
 ***** 1 oktober 2012 [ minggu ke 4 ] *****
- 1. penambahan mata pelajaran dengan item: kode, nama, sks
- 2. pada saat pengambilan data mata kuliah harus ada cheking tidak boleh ambil mata kuliah dobel.
+ 
+1. penambahan mata pelajaran dengan item: kode, nama, sks
+ 
+2. pada saat pengambilan data mata kuliah harus ada cheking tidak boleh ambil mata kuliah dobel.
+
+****** 15 oktober 2012 ****
+1. Pencarian mhs, jika tidak ada cari yang terdekat
+2. Pengambilan FRS, tambahkan jumlah SKS dan Mata Kuliah (done)
+3. Preview report FRS
+4. jadwal demo: 12 November 2012
+5. report daftar mahasiswa yang mengambil mata kuliah tertentu.

@@ -1,6 +1,6 @@
 object frmEditMahasiswa: TfrmEditMahasiswa
   Left = 361
-  Top = 163
+  Top = 144
   BorderStyle = bsDialog
   Caption = 'Ubah Data Mahasiswa'
   ClientHeight = 245
