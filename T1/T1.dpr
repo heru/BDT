@@ -10,7 +10,9 @@ uses
   PengambilanFRS in 'PengambilanFRS.pas' {FrmPengambilanFRS},
   MataKuliah in 'MataKuliah.pas' {FormMataKuliah},
   LaporanFRS in 'LaporanFRS.pas' {FrmLaporanFRS},
-  DaftarMahasiswaPerKelas in 'DaftarMahasiswaPerKelas.pas' {FrmDaftarMhsPerKelas};
+  DaftarMahasiswaPerKelas in 'DaftarMahasiswaPerKelas.pas' {FrmDaftarMhsPerKelas},
+  UbahNRP in 'UbahNRP.pas' {FormUbahNRP},
+  UnitRekapFRSSemua in 'UnitRekapFRSSemua.pas' {FormRekapFRSSemua};
 
 {$R *.res}
 
@@ -25,5 +27,6 @@ begin
   Application.CreateForm(TFormMataKuliah, FormMataKuliah);
   Application.CreateForm(TFrmLaporanFRS, FrmLaporanFRS);
   Application.CreateForm(TFrmDaftarMhsPerKelas, FrmDaftarMhsPerKelas);
+  Application.CreateForm(TFormUbahNRP, FormUbahNRP);
   Application.Run;
   end.

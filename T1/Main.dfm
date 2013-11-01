@@ -1,6 +1,6 @@
 object FrmMahasiswa: TFrmMahasiswa
-  Left = 336
-  Top = 159
+  Left = 295
+  Top = 131
   BorderStyle = bsSingle
   Caption = 'Data Mahasiswa'
   ClientHeight = 521
@@ -120,6 +120,15 @@ object FrmMahasiswa: TFrmMahasiswa
     TabOrder = 6
     OnClick = btnDeleteClick
   end
+  object ButtonUbahNRP: TButton
+    Left = 784
+    Top = 472
+    Width = 81
+    Height = 33
+    Caption = 'Ubah NRP'
+    TabOrder = 7
+    OnClick = ButtonUbahNRPClick
+  end
   object mhsDS: TDataSource
     DataSet = ADODataSet1
     Left = 376
@@ -180,6 +189,10 @@ object FrmMahasiswa: TFrmMahasiswa
       object MnDaftarKelas: TMenuItem
         Caption = 'Daftar Mhs Per Kelas'
         OnClick = MnDaftarKelasClick
+      end
+      object RekapFRSSemua: TMenuItem
+        Caption = 'Rekap FRS Semua'
+        OnClick = RekapFRSSemuaClick
       end
     end
     object mnExit: TMenuItem

@@ -121,7 +121,7 @@ begin
   dsQueryFRS.DataSet := adoQueryFRS;
   adoQueryFRS.Open;
   jumlahMK := adoQueryFRS.RecordCount;
-
+  // looping untuk menghitung jumlah mata kuliah
   if jumlahMK > 0 then
   begin
     row :=0;

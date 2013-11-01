@@ -1,11 +1,11 @@
 object FrmPengambilanFRS: TFrmPengambilanFRS
-  Left = 192
-  Top = 101
+  Left = 231
+  Top = 182
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Pengambilan FRS'
-  ClientHeight = 457
-  ClientWidth = 903
+  ClientHeight = 463
+  ClientWidth = 897
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -163,17 +163,17 @@ object FrmPengambilanFRS: TFrmPengambilanFRS
   object btnHapusMataKuliah: TButton
     Left = 416
     Top = 350
-    Width = 121
+    Width = 233
     Height = 33
-    Caption = '&Hapus Mata Kuliah'
+    Caption = '&Hapus Mata Kuliah Yang Sudah Di Ambil'
     Enabled = False
     TabOrder = 8
     OnClick = btnHapusMataKuliahClick
   end
   object dsMataKuliah: TDataSource
     DataSet = adoDSMataKuliah
-    Left = 776
-    Top = 392
+    Left = 736
+    Top = 400
   end
   object adoDSMataKuliah: TADODataSet
     Active = True
@@ -192,14 +192,14 @@ object FrmPengambilanFRS: TFrmPengambilanFRS
   object dsLookupMhs: TDataSource
     DataSet = adoDatasetLookupMhs
     Left = 384
-    Top = 32
+    Top = 16
   end
   object adoDatasetLookupMhs: TADODataSet
     Connection = FrmMahasiswa.ADOConnection1
     CommandText = 'select * from mhs;'
     Parameters = <>
-    Left = 440
-    Top = 40
+    Left = 424
+    Top = 16
   end
   object adoQueryFRS: TADODataSet
     AfterOpen = adoQueryFRSAfterOpen
