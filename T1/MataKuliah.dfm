@@ -5,7 +5,7 @@ object FormMataKuliah: TFormMataKuliah
   BorderStyle = bsSingle
   Caption = 'Daftar Mata Kuliah'
   ClientHeight = 351
-  ClientWidth = 801
+  ClientWidth = 783
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,6 +13,7 @@ object FormMataKuliah: TFormMataKuliah
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poOwnerFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object dbgridMataKuliah: TDBGrid
@@ -29,12 +30,52 @@ object FormMataKuliah: TFormMataKuliah
     TitleFont.Style = []
   end
   object dbNavMataKuliah: TDBNavigator
-    Left = 24
-    Top = 312
-    Width = 480
-    Height = 25
+    Left = 12
+    Top = 315
+    Width = 465
+    Height = 30
     DataSource = dsMataKuliah
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
     TabOrder = 1
+  end
+  object btnAdd: TButton
+    Left = 492
+    Top = 315
+    Width = 75
+    Height = 30
+    Caption = '+'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    OnClick = btnAddClick
+  end
+  object btnDelete: TButton
+    Left = 576
+    Top = 315
+    Width = 75
+    Height = 30
+    Caption = '-'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnClick = btnDeleteClick
+  end
+  object btnChange: TButton
+    Left = 656
+    Top = 312
+    Width = 75
+    Height = 33
+    Caption = 'Ubah'
+    TabOrder = 4
+    OnClick = btnChangeClick
   end
   object adoDSMataKuliah: TADODataSet
     Active = True

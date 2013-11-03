@@ -166,7 +166,7 @@ object FrmMahasiswa: TFrmMahasiswa
   object MainMenu1: TMainMenu
     Left = 480
     object mnFile: TMenuItem
-      Caption = '&File'
+      Caption = '&Master Data'
       object mnDosen: TMenuItem
         Caption = 'Dosen'
         OnClick = mnDosenClick

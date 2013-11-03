@@ -12,7 +12,8 @@ uses
   LaporanFRS in 'LaporanFRS.pas' {FrmLaporanFRS},
   DaftarMahasiswaPerKelas in 'DaftarMahasiswaPerKelas.pas' {FrmDaftarMhsPerKelas},
   UbahNRP in 'UbahNRP.pas' {FormUbahNRP},
-  UnitRekapFRSSemua in 'UnitRekapFRSSemua.pas' {FormRekapFRSSemua};
+  UnitRekapFRSSemua in 'UnitRekapFRSSemua.pas' {FormRekapFRSSemua},
+  TambahMataKuliah in 'TambahMataKuliah.pas' {FormTambahKuliah};
 
 {$R *.res}
 
@@ -28,5 +29,6 @@ begin
   Application.CreateForm(TFrmLaporanFRS, FrmLaporanFRS);
   Application.CreateForm(TFrmDaftarMhsPerKelas, FrmDaftarMhsPerKelas);
   Application.CreateForm(TFormUbahNRP, FormUbahNRP);
+  Application.CreateForm(TFormTambahKuliah, FormTambahKuliah);
   Application.Run;
   end.
