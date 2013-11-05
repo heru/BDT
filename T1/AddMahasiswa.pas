@@ -44,20 +44,41 @@ implementation
 procedure TFrmTambahMahasiswa.btnSimpanClick(Sender: TObject);
 var adoCmd : TADOCommand;
     query_insert : string;
+    adodsMHS : TADODataSet;
 begin
   if Edit1.Text <> '' then
   begin
-    query_insert := 'insert into mhs(nrp, nama, alamat, dosen_wali, prodi) values(''' + Edit1.Text + ''', ''' + Edit2.Text + ''', ''' + Edit3.Text + ''', ''' + dbLookupDosen.KeyValue + ''', ''' + dblookupProdi.KeyValue + ''');';
+    // cek nrp apakah sudah ada atau belum
+    adodsMHS := TADODataSet.Create(self);
+    adodsMHS.Connection := FrmMahasiswa.ADOConnection1;
+    adodsMHS.CommandType := cmdText;
+    adodsMHS.CommandText := 'select nrp from mhs where nrp like ''' + Edit1.Text + ''';';
+    adodsMHS.Open;
+    if adodsMHS.RecordCount < 1 then
+    begin
 
-    adoCmd := TADOCommand.Create(self);
-    adoCmd.Connection := FrmMahasiswa.ADOConnection1;
-    adoCmd.CommandType := cmdText;
-    adoCmd.CommandText := query_insert;
-    adoCmd.Execute;
-    // refresh grid di FrmMahasiswa
-    FrmMahasiswa.ReloadDataset;
-    adoCmd.Free;
-    close ;
+
+
+      query_insert := 'insert into mhs(nrp, nama, alamat, dosen_wali, prodi) values(''' + Edit1.Text + ''', ''' + Edit2.Text + ''', ''' + Edit3.Text + ''', ''' + dbLookupDosen.KeyValue + ''', ''' + dblookupProdi.KeyValue + ''');';
+
+      adoCmd := TADOCommand.Create(self);
+      adoCmd.Connection := FrmMahasiswa.ADOConnection1;
+      adoCmd.CommandType := cmdText;
+      adoCmd.CommandText := query_insert;
+      adoCmd.Execute;
+      // refresh grid di FrmMahasiswa
+      FrmMahasiswa.ReloadDataset;
+      adoCmd.Free;
+      close ;
+    end
+    else
+    begin
+      Application.MessageBox('NRP yang sama sudah ada', 'Duplikasi NRP', MB_OK);
+
+    end;
+    adodsMHS.Close;
+    adodsMHS.Free;
+
   end
   else
   begin
