@@ -13,6 +13,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     StringGrid2: TStringGrid;
+    StringGrid3: TStringGrid;
   private
     { Private declarations }
     DBConnection:TADOConnection;
@@ -23,6 +24,7 @@ type
     procedure RekapMataKuliah;
     procedure hitung_sks(nrp:string; row :Integer; adoFRS:TADODataSet);
     procedure hitung_mhs(kodemk:string; row:Integer; sks:Integer; adoFRS:TADODataSet);
+    procedure hitung_rangking_sks();
   end;
 
   RekapFRS = class(TObject)
@@ -54,6 +56,7 @@ begin
   StringGrid1.RowCount := 20;
   self.rekap;
   self.RekapMataKuliah;
+  self.hitung_rangking_sks;
 end;
 
 procedure RekapFRS.HitungRataRata;
@@ -112,7 +115,7 @@ begin
       else
       begin
           ratarata := totalmatakuliah/totalsks;
-          StringGrid1.Cells[5, row] :=  FloatToStr(ratarata);
+          StringGrid1.Cells[5, row] :=  FloatToStrF(ratarata, ffFixed, 8, 2);
       end;
     except
       on E: Exception do
@@ -201,13 +204,67 @@ var
   total_mhs : integer;
 begin
   adoFRS.Close;
-  querystring := 'select id, mhs_id  from pengambilan_frs where  kode_mata_kuliah = ''' + kodemk + ''';';
+  querystring := 'select id, mhs_id  from pengambilan_frs where kode_mata_kuliah = ''' + kodemk + ''';';
   adoFRS.CommandText := querystring;
   adoFRS.Open;
 
   total_mhs := adoFRS.RecordCount;
   StringGrid2.Cells[4,row]:=IntToStr(total_mhs);
-  StringGrid2.Cells[5,row]:= FloatToStr(total_mhs/sks);
+  StringGrid2.Cells[5,row]:= FloatToStrF(total_mhs/sks, ffFixed, 8,2);
+end;
+
+procedure TFormRekapFRSSemua.hitung_rangking_sks;
+var
+  querystring: string;
+  adoQuery :TADODataSet;
+  row:integer;
+  size:integer;
+  last_sks : integer;
+  count : integer;
+  index: integer;
+begin
+  querystring := 'SELECT distinct m.nrp, sum(mk.sks) AS total FROM pengambilan_frs AS f, mhs AS m, mata_kuliah AS mk WHERE f.mhs_id=m.nrp And f.kode_mata_kuliah=mk.kode GROUP BY m.nrp;';
+
+  adoQuery := TADODataSet.Create(self);
+  adoQuery.CommandText := querystring;
+  adoQuery.Connection := self.DBConnection;
+  {*
+  with adoQuery.Parameters.AddParameter do
+  begin
+    DataType := ftString;
+    Direction := pdInput;
+    Value := ' ';
+  end;
+  *}
+  adoQuery.Open;
+  adoQuery.First;
+
+  StringGrid3.Cells[0,0] := 'No';
+  StringGrid3.Cells[1,0] := 'Jumlah Mhs';
+  StringGrid3.Cells[2,0] := 'Jumlah SKS';
+
+  row :=0;
+  size := adoQuery.RecordCount;
+  last_sks := 0;
+  index := 0;
+  while index <= size do
+  begin
+    if (last_sks = 0) or (adoQuery.FieldValues['total'] < last_sks) then
+    begin
+      row := row + 1;
+      StringGrid3.Cells[0,row ] := IntToStr(row);
+      StringGrid3.Cells[1, row] := IntToStr(1);
+      StringGrid3.Cells[2, row] := IntToStr(adoQuery.FieldValues['total']);
+      last_sks := adoQuery.FieldValues['total'];
+    end else begin
+      count := StrToInt(StringGrid3.Cells[1, row]);
+      count := count + 1;
+      StringGrid3.Cells[1, row] := IntToStr(count);
+    end;                                           
+    index := index + 1;
+    adoQuery.Next;
+  end;
+  adoQuery.Close;
 end;
 
 { RekapFRS }

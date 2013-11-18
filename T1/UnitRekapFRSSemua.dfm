@@ -1,8 +1,8 @@
 object FormRekapFRSSemua: TFormRekapFRSSemua
-  Left = 334
-  Top = 178
-  Width = 786
-  Height = 480
+  Left = 515
+  Top = 30
+  Width = 660
+  Height = 650
   Caption = 'Rekap FRS Semua Mahasiswa'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,9 +16,9 @@ object FormRekapFRSSemua: TFormRekapFRSSemua
   object lblTotal: TLabel
     Left = 16
     Top = 424
-    Width = 118
+    Width = 70
     Height = 13
-    Caption = 'Total Mahasiswa/SKS = '
+    Caption = 'Rangking SKS'
   end
   object Label1: TLabel
     Left = 16
@@ -37,7 +37,7 @@ object FormRekapFRSSemua: TFormRekapFRSSemua
   object StringGrid1: TStringGrid
     Left = 16
     Top = 32
-    Width = 745
+    Width = 609
     Height = 193
     ColCount = 6
     DefaultColWidth = 100
@@ -45,12 +45,21 @@ object FormRekapFRSSemua: TFormRekapFRSSemua
     TabOrder = 0
   end
   object StringGrid2: TStringGrid
-    Left = 16
+    Left = 8
     Top = 248
-    Width = 745
+    Width = 617
     Height = 169
     DefaultColWidth = 100
     FixedCols = 0
     TabOrder = 1
+  end
+  object StringGrid3: TStringGrid
+    Left = 8
+    Top = 448
+    Width = 625
+    Height = 161
+    DefaultColWidth = 100
+    FixedCols = 0
+    TabOrder = 2
   end
 end

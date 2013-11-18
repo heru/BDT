@@ -1,6 +1,6 @@
 object FrmMahasiswa: TFrmMahasiswa
   Left = 295
-  Top = 131
+  Top = 76
   BorderStyle = bsSingle
   Caption = 'Data Mahasiswa'
   ClientHeight = 521
