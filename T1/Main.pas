@@ -82,6 +82,7 @@ var query_select :string;
     adodsSearch: TADODataSet;
     upper : Integer;
     lower : integer;
+    nrp_found: string;
 begin
     if Self.txtEdit.Text <> '' then
     begin
@@ -96,9 +97,11 @@ begin
       adodsSearch.Open;
       if adodsSearch.RecordCount > 0 then
       begin
+        nrp_found := adodsSearch.FieldValues['nrp'];
         ADODataSet1.Close;
-        ADODataSet1.CommandText := query_select;
-
+        ADODataSet1.CommandText := 'select m.nrp as nrp, m.nama as nama, m.alamat as alamat, d.nama as dosen, p.nama as prodi from mhs m, dosen d, prodi p where m.dosen_wali = d.nip and m.prodi = p.kode_prodi order by m.nrp;';
+        ADODataSet1.Open;
+        MoveCursor(nrp_found);
       end
       else
       begin
@@ -112,8 +115,9 @@ begin
       ADODataSet1.Close;
       ADODataSet1.CommandText := 'select m.nrp as nrp, m.nama as nama, m.alamat as alamat, d.nama as dosen, p.nama as prodi from mhs m, dosen d, prodi p where m.dosen_wali = d.nip and m.prodi = p.kode_prodi order by m.nrp;';
       //ADODataSet1.CommandText := 'select m.nrp as nrp, m.nama as nama, m.alamat as alamat, m.dosen_wali as dosen_wali, m.prodi as prodi, d.nama as nama_dosen, p.nama as nama_prodi from mhs m, dosen d, prodi p where m.dosen_wali = d.nip and m.prodi = p.kode_prodi;'
+      ADODataSet1.Open;
     end;
-    ADODataSet1.Open;
+
 end;
 
 procedure TFrmMahasiswa.CariNRPTerdekat(nrp:string);
