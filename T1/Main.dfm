@@ -195,6 +195,13 @@ object FrmMahasiswa: TFrmMahasiswa
         OnClick = RekapFRSSemuaClick
       end
     end
+    object Nilai1: TMenuItem
+      Caption = 'Nilai'
+      object mnLihatNilai: TMenuItem
+        Caption = 'Lihat'
+        OnClick = mnLihatNilaiClick
+      end
+    end
     object mnExit: TMenuItem
       Caption = '&Keluar'
       OnClick = mnExitClick

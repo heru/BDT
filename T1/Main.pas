@@ -30,6 +30,8 @@ type
     MnDaftarKelas: TMenuItem;
     ButtonUbahNRP: TButton;
     RekapFRSSemua: TMenuItem;
+    Nilai1: TMenuItem;
+    mnLihatNilai: TMenuItem;
     procedure btnEditClick(Sender: TObject);
     procedure btnFilterClick(Sender: TObject);
     procedure mnExitClick(Sender: TObject);
@@ -42,6 +44,7 @@ type
     procedure MnDaftarKelasClick(Sender: TObject);
     procedure ButtonUbahNRPClick(Sender: TObject);
     procedure RekapFRSSemuaClick(Sender: TObject);
+    procedure mnLihatNilaiClick(Sender: TObject);
   private
     { Private  }
   public
@@ -58,7 +61,7 @@ var
 implementation
 
 uses EditMahasiswa,AddMahasiswa, ListDosen, ListProdi, PengambilanFRS,
-     MataKuliah, DaftarMahasiswaPerKelas, UbahNRP, UnitRekapFRSSemua;
+     MataKuliah, DaftarMahasiswaPerKelas, UbahNRP, UnitRekapFRSSemua, NilaiAkademik;
 
 {$R *.dfm}
 
@@ -311,4 +314,16 @@ begin
     formRekapFRS.Free
   end;
 end;
+procedure TFrmMahasiswa.mnLihatNilaiClick(Sender: TObject);
+var
+  formNilaiAkad : TFrmNilaiAkademik;
+begin
+  try
+    formNilaiAkad :=TFrmNilaiAkademik.Create(self, self.ADOConnection1);
+    formNilaiAkad.ShowModal;
+  finally
+    formNilaiAkad.Free;            
+  end;
+end;
+
 end.

@@ -13,7 +13,8 @@ uses
   DaftarMahasiswaPerKelas in 'DaftarMahasiswaPerKelas.pas' {FrmDaftarMhsPerKelas},
   UbahNRP in 'UbahNRP.pas' {FormUbahNRP},
   UnitRekapFRSSemua in 'UnitRekapFRSSemua.pas' {FormRekapFRSSemua},
-  TambahMataKuliah in 'TambahMataKuliah.pas' {FormTambahKuliah};
+  TambahMataKuliah in 'TambahMataKuliah.pas' {FormTambahKuliah},
+  NilaiAkademik in 'NilaiAkademik.pas' {FrmNilaiAkademik};
 
 {$R *.res}
 
@@ -30,5 +31,6 @@ begin
   Application.CreateForm(TFrmDaftarMhsPerKelas, FrmDaftarMhsPerKelas);
   Application.CreateForm(TFormUbahNRP, FormUbahNRP);
   Application.CreateForm(TFormTambahKuliah, FormTambahKuliah);
+  Application.CreateForm(TFrmNilaiAkademik, FrmNilaiAkademik);
   Application.Run;
   end.
